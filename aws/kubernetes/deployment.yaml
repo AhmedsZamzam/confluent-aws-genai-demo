@@ -1,0 +1,228 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: csp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+        fargateprofile: csp-demo
+    spec:
+      serviceAccountName: webapp
+      containers:
+        - name: webapp
+          image: 635910096382.dkr.ecr.us-east-1.amazonaws.com/csp-demo-webapp:5.4
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+          env:
+            - name: SASL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: username
+            - name: SASL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: password
+            - name: SR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: username
+            - name: SR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: password
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: password
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: username
+            - name: ENV
+              value: "prod"
+            - name: API_HOST
+              value: "http://k8s-cspdemo-webappse-8a3e02d37e-8edc2106071e2e74.elb.us-east-1.amazonaws.com"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+  namespace: csp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot
+  template:
+    metadata:
+      labels:
+        app: chatbot
+        fargateprofile: csp-demo
+    spec:
+      serviceAccountName: chatbot
+      containers:
+        - name: chatbot
+          image: 635910096382.dkr.ecr.us-east-1.amazonaws.com/csp-demo-chatbot:5.4
+          imagePullPolicy: Always
+          env:
+            - name: SASL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: username
+            - name: SASL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: password
+            - name: SR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: username
+            - name: SR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: password
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: password
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: username
+            - name: ENV
+              value: "prod"
+            - name: API_HOST
+              value: "http://k8s-cspdemo-webappse-8a3e02d37e-8edc2106071e2e74.elb.us-east-1.amazonaws.com"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: summary
+  namespace: csp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: summary
+  template:
+    metadata:
+      labels:
+        app: summary
+        fargateprofile: csp-demo
+    spec:
+      serviceAccountName: chatsummary
+      containers:
+        - name: webapp
+          image: 635910096382.dkr.ecr.us-east-1.amazonaws.com/csp-demo-summary:5.4
+          imagePullPolicy: Always
+          env:
+            - name: SASL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: username
+            - name: SASL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: password
+            - name: SR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: username
+            - name: SR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: password
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: password
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: username
+            - name: ENV
+              value: "prod"
+            - name: API_HOST
+              value: "http://k8s-cspdemo-webappse-8a3e02d37e-8edc2106071e2e74.elb.us-east-1.amazonaws.com"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: submit
+  namespace: csp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: submit
+  template:
+    metadata:
+      labels:
+        app: submit
+        fargateprofile: csp-demo
+    spec:
+      serviceAccountName: chatsubmit
+      containers:
+        - name: webapp
+          image: 635910096382.dkr.ecr.us-east-1.amazonaws.com/csp-demo-submit:5.4
+          imagePullPolicy: Always
+          env:
+            - name: SASL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: username
+            - name: SASL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-kafka-secrets
+                  key: password
+            - name: SR_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: username
+            - name: SR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ccloud-sr-secrets
+                  key: password
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: password
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: bedrock-secrets
+                  key: username
+            - name: ENV
+              value: "prod"

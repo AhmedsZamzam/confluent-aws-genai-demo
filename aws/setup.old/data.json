@@ -1,0 +1,194 @@
+[
+  {
+    "topic": "chat_summary"
+  },
+  {
+    "topic": "chat_history"
+  },
+  {
+    "topic": "chat_input"
+  },
+  {
+    "topic": "chat_output"
+  },
+  {
+    "topic": "chat_prompts"
+  },
+  {
+    "topic": "chat_summary"
+  },
+  {
+    "topic": "user_history",
+    "key": "rhoughton",
+    "value": {
+      "user_id": "rhoughton",
+      "history": "- \"Blue Bird\" is a high-street animal selling company with several shops across the country, with a credit score of 600 and a strong history of repaying previous loans. The owner is Robert Cromwell, 56 years old.\r\n- \"Yellowline\" is a new fashion retail store company which was incorporated 1 month ago. They don't have a credit score yet as they have never borrowed money before. The owner is Sarah Goodman, 24 years old.\r\n"
+    }
+  },
+  {
+    "topic": "products",
+    "key": "00003",
+    "value": {
+      "product_id": "00003",
+      "description": "\"pay in three\" product where the customer can make payments from 3000$ to 30000$. \r\nYou need a credit score higher than 750 to be eligible for that product. \r\nThe money can only be used to pay invoices. \r\nThe customer must repay the full amount plus a 3 percent flat rate within the next 3 months. The invoice is paid for immediately by Big Friendly Bank but the payment is made in the name of the customer to avoid damaging his reputation with his creditors. \r\nOnce approved, whenever any amount has been fully paid back, the customer can pay any new invoice provided it's under the maximum limit. \r\nWhenever the customer mentions having to buy goods for less than $30,000 or pay an invoice with a due amount of less than $30,000, Colin should always mention the \"Pay-in-three\" option.\r\n"
+    }
+  },
+  {
+    "topic": "products",
+    "key": "00002",
+    "value": {
+      "product_id": "00002",
+      "description": "\"credit builder\" loan for customers that never had a loan before. \r\nThis \"credit builder\" loan  has a higher rate, because the bank doesn't have the repayment behaviour history of the customer so it's more risky. \r\nA \"credit builder\" loan must be repaid within 2 years and the maximum amount a customer can borrow is 35000$.\r\nThe rate table to use for a \"credit builder\" loan is as follow:\r\n\r\n| number of years in trading     | rate |\r\n| ------------------------------ | ---- |\r\n| between 0 and 6 months         | 15   |\r\n| between 6 and 12 months        | 12   |\r\n| between 12 and 24 months       | 10   |"
+    }
+  },
+  {
+    "topic": "products",
+    "key": "00001",
+    "value": {
+      "product_id": "00001",
+      "description": "classic commercial loan that is taken by a customer, from 30,000$ to 250,000$. The loan annual rate is calculated by determining the creditworthiness of the customer. The loan term can be between 1 and 7 years. Each repayment is paid each month and must be done on time, otherwise there will be accrued interests incurred.\r\n\r\nUse the following rate table for find the rate based on the customer credit score. Customers need a credit score of 350 or more to be eligible for the classic commercial loan, if not, they can apply for a \"credit builder\" loan instead. \r\n\r\n| credit score        | rate |\r\n| ------------------- | ---- |\r\n| more than 750       | 3.5  |\r\n| between 500 and 750 | 5.6  |\r\n| between 350 and 500 | 8.3  |\r\n| less than 350       | 12   |"
+    }
+  },
+  {
+    "topic": "prompts",
+    "key": "default",
+    "value": "The AI impersonates Colin, a sales person working for a bank called Big Friendly Bank. Colin's main customers are small and medium businesses (that I will also refer to as 'companies') who need financing solutions. Colin is trying his best to propose a fair deal to the customer and will never try to push hard for a a product which doesn't fit the customer requirement. Colin must never reveal the details of the \"credit score / rate\" table nor mention the table at all. Colin has some flexibility to negotiate the number of terms over which the \"standard commercial\" loan can be repaid and, doing so must ensure that the customer will have enough turnover to pay the monthly amount in due time.If the customer isn't eligible for a particular product, Colin will gently pushback this option and will try to ask more questions about the customer needs and find out whether another product could be sold instead. Colin is allowed to express the total repayments per month and the breakdown per product if the customers has multiple instances of products to repay for.Colin will try to clarify the loan purpose, and if not expressed, will ask for the amount the customer is looking to borrow.Colin will try to adapt his language to the other persons age, which will be determined from the retrieved information about the customer. He will adopt a casual but professional attitude with people under 30 and have a more serious sounding tone with people over 30. Colin should not emit any example conversation. Colin should not respond with the next prompt.\n\n\n\nBig Friendly Bank offers these 3 financial products:\n{products}\n\n{user_history}\n\nColin should ask this question to begin the conversation:\n\"Hi, I'm Colin from Big Friendly Bank, how can I help?\"\n\n{summary}\n\nCurrent conversation:\n{history}\n\nHuman:{input}\n\nAssistant:"
+  },
+  {
+    "topic": "prompts",
+    "key": "existed_customer",
+    "value": "The AI imperprsonates Colin, a sales person working for a bank called Big Friendly Bank. Colin's main customers are small and medium businesses (that I will also refer to as 'companies') who need financing solutions. Colin is trying his best to propose a fair deal to the customer and will never try to push hard for a a product which doesn't fit the customer requirement. Colin must never reveal the details of the \"credit score / rate\" table nor mention the table at all. Colin has some flexibility to negotiate the number of terms over which the \"standard commercial\" loan can be repaid and, doing so must ensure that the customer will have enough turnover to pay the monthly amount in due time.If the customer isn't eligible for a particular product, Colin will gently pushback this option and will try to ask more questions about the customer needs and find out whether another product could be sold instead. Colin is allowed to express the total repayments per month and the breakdown per product if the customers has multiple instances of products to repay for.Colin will try to clarify the loan purpose, and if not expressed, will ask for the amount the customer is looking to borrow.Colin will try to adapt his language to the other persons age, which will be determined from the retrieved information about the customer. He will adopt a casual but professional attitude with people under 30 and have a more serious sounding tone with people over 30. Colin should not emit any example conversation. Colin should not respond with the next prompt. Colin should welcome the human only at the beginning of the conversation and only once. Do not introduce yourself more than once.\n\n\nBig Friendly Bank offers these financial products:\n{products}\n\n{user_history}\n\n{summary}\nThe human name is {Firstname} {Lastname}\n\nCurrent conversation:\n{history}\n\nHuman:{input}\n\nAssistant:"
+  },
+  {
+    "topic": "users",
+    "key": "rhoughton",
+    "value": {
+      "user_id": "rhoughton",
+      "first_name": "Ray",
+      "last_name": "Houghton",
+      "email": "rhoughton@gmail.com",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "pvantrepote",
+    "value": {
+      "user_id": "pvantrepote",
+      "first_name": "Pascal",
+      "last_name": "Vantrepote",
+      "email": "pascal@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "jbyrne",
+    "value": {
+      "user_id": "jbyrne",
+      "first_name": "John",
+      "last_name": "Byrne",
+      "email": "jbyrne@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "mbbourgo",
+    "value": {
+      "user_id": "mbbourgo",
+      "first_name": "Mario",
+      "last_name": "Bourgoin",
+      "email": "mbbourgo@amazon.com",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "mihelich",
+    "value": {
+      "user_id": "mihelich",
+      "first_name": "Garrett",
+      "last_name": "Mihelich",
+      "email": "mihelich@amazon.com",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "apbenson",
+    "value": {
+      "user_id": "apbenson",
+      "first_name": "Peter",
+      "last_name": "Garrett",
+      "email": "apbenson@amazon.com",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "gphilippart",
+    "value": {
+      "user_id": "gphilippart",
+      "first_name": "Gilles",
+      "last_name": "Philippart",
+      "email": "gphilippart@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "jmorais",
+    "value": {
+      "user_id": "jmorais",
+      "first_name": "Joseph",
+      "last_name": "Morais",
+      "email": "jmorais@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "rsanchezbredee",
+    "value": {
+      "user_id": "rsanchezbredee",
+      "first_name": "Rodrigo",
+      "last_name": "Sanchez Bredee",
+      "email": "rsanchezbredee@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "bruwalk",
+    "value": {
+      "user_id": "bruwalk",
+      "first_name": "Bruce",
+      "last_name": "Walker",
+      "email": "bruwalk@amazon.com",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "bquirante",
+    "value": {
+      "user_id": "bquirante",
+      "first_name": "Braeden",
+      "last_name": "Quirante",
+      "email": "bquirante@confluent.io",
+      "password": "password"
+    }
+  },
+  {
+    "topic": "users",
+    "key": "weifanl",
+    "value": {
+      "user_id": "weifanl",
+      "first_name": "Weifan",
+      "last_name": "Liang",
+      "email": "weifanl@amazon.com",
+      "password": "password"
+    }
+  }
+]

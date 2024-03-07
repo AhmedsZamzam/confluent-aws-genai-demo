@@ -1,0 +1,30 @@
+spring:
+  kafka:
+    bootstrap-servers: "${BOOTSTRAP_SERVER}"
+    application-id: "chat-bot"
+    group-id: "chat-bot-group"
+    client-id: "chat-bot-client"
+    security:
+      protocol: "SASL_SSL"
+    sasl:
+      mechanism: "PLAIN"
+      jaas:
+        config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='#{'${SASL_USERNAME}'.trim()}' password='#{'${SASL_PASSWORD}'.trim()}';"
+    consumer:
+      group-id: "group-id"
+      auto-offset-reset: earliest
+      key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      value-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+bedrock:
+  region: "us-east-1"
+  key: ${AWS_ACCESS_KEY_ID}
+  secret: ${AWS_SECRET_ACCESS_KEY}
+  modelId: "anthropic.claude-v2"

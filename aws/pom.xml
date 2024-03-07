@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.confluent.pie</groupId>
+        <artifactId>csp-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>io.confluent.pie.csp-demo</groupId>
+    <artifactId>aws</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>bot</module>
+        <module>summary</module>
+        <module>setup</module>
+        <module>submit</module>
+        <module>app</module>
+    </modules>
+
+</project>

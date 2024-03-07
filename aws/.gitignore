@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+.ipynb_checkpoints
+
+./kubernetes/config.properties
+config.properties
+env.sh
+*.local
